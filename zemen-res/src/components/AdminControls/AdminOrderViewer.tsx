@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useAdminTheme } from "./AdminThemeProvider";
+import { API_BASE_URL } from "../../utils/api";
 
 interface OrderItem {
     item_name?: string;
@@ -43,7 +44,7 @@ export const AdminOrderViewer = () => {
 
     const fetchOrders = async (token: string) => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/orders/admin/orders/", {
+            const response = await fetch(`${API_BASE_URL}/api/orders/admin/orders/`, {
                 headers: { Authorization: `Token ${token}` },
             });
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
-
+import { API_BASE_URL } from "../utils/api";
 const ReservationForm: React.FC = () => {
   const [form, setForm] = useState({
     name: "",
@@ -20,7 +20,7 @@ const ReservationForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await fetch("http://127.0.0.1:8000/api/orders/reservations/", {
+    const response = await fetch(`${API_BASE_URL }/api/orders/reservations/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

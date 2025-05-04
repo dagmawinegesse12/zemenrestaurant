@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { motion } from "framer-motion";
+import { API_BASE_URL } from "../utils/api";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY!);
 
@@ -166,7 +167,7 @@ export const InteractiveMenuOrder: React.FC<Props> = ({ quantities, setQuantitie
         console.log("Total price", totalPrice);
         console.log("Amount sending", Math.round(totalPrice * 100));
         
-        const paymentResponse = await fetch("http://127.0.0.1:8000/api/orders/create-intent/", {
+        const paymentResponse = await fetch(`${API_BASE_URL}/api/orders/create-intent/`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ amount: Math.round(totalPrice * 100) }),
@@ -179,7 +180,7 @@ export const InteractiveMenuOrder: React.FC<Props> = ({ quantities, setQuantitie
     };
 
     const submitOrder = async (orderDataToSend: OrderData) => {
-        const response = await fetch("http://127.0.0.1:8000/api/orders/submit/", {
+        const response = await fetch(`${API_BASE_URL}/api/orders/submit/`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(orderDataToSend),
@@ -308,7 +309,7 @@ const PaymentForm: React.FC<{ orderData: OrderData }> = ({ orderData }) => {
     const [processing, setProcessing] = useState(false);
 
     const submitOrder = async () => {
-        const response = await fetch("http://127.0.0.1:8000/api/orders/submit/", {
+        const response = await fetch(`${API_BASE_URL}/api/orders/submit/`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(orderData),

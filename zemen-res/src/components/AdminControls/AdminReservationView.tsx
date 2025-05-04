@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useAdminTheme } from "./AdminThemeProvider";
+import { API_BASE_URL } from "../../utils/api";
 
 interface Reservation {
     id: number;
@@ -20,7 +21,7 @@ const AdminReservationView: React.FC = () => {
 
     const fetchReservations = async () => {
         const token = localStorage.getItem("adminToken");
-        const response = await fetch("http://127.0.0.1:8000/api/orders/admin/reservations/", {
+        const response = await fetch(`${API_BASE_URL}/api/orders/admin/reservations/`, {
             headers: { Authorization: `Token ${token}` },
         });
 
@@ -44,7 +45,7 @@ const AdminReservationView: React.FC = () => {
 
     const updateStatus = async (id: number, status: "confirmed" | "cancelled") => {
         const token = localStorage.getItem("adminToken");
-        const response = await fetch(`http://127.0.0.1:8000/api/orders/admin/reservations/${id}/`, {
+        const response = await fetch(`${API_BASE_URL}/api/orders/admin/reservations/${id}/`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

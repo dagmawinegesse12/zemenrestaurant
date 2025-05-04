@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { API_BASE_URL } from "../../utils/api";
 
 interface AdminUser {
     username: string;
@@ -31,7 +32,7 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 
     const fetchAdminUser = async (token: string) => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/orders/profile/", {
+            const response = await fetch(`${API_BASE_URL}/api/orders/profile/`, {
                 headers: {
                     Authorization: `Token ${token}`,
                 },

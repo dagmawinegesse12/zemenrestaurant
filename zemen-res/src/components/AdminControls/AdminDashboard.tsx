@@ -13,6 +13,7 @@ import {
 import AdminView from "./AdminView";
 import { useAdminAuth } from "./AdminAuthContext";
 import { useAdminTheme } from "./AdminThemeProvider";
+import { API_BASE_URL } from "../../utils/api";
 
 interface AdminUser {
     username: string;
@@ -47,7 +48,7 @@ const AdminDashboard: React.FC = () => {
     }, [token]);
 
     const fetchAdminUser = async () => {
-        const response = await fetch("http://127.0.0.1:8000/api/orders/profile/", {
+        const response = await fetch(`${API_BASE_URL}/api/orders/profile/`, {
             headers: { Authorization: `Token ${token}` },
         });
         if (response.ok) {
@@ -57,7 +58,7 @@ const AdminDashboard: React.FC = () => {
     };
 
     const fetchOrders = async () => {
-        const response = await fetch("http://127.0.0.1:8000/api/orders/admin/orders/", {
+        const response = await fetch(`${API_BASE_URL}/api/orders/admin/orders/`, {
             headers: { Authorization: `Token ${token}` },
         });
         const data = await response.json();
