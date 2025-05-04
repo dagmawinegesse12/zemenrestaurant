@@ -26,7 +26,7 @@ urlpatterns = [
 
 
     #SPA catch-all route --> this should be the last route in the urlpatterns list
-    path("", TemplateView.as_view(template_name="index.html"), name="home"),
+    # path("", TemplateView.as_view(template_name="index.html"), name="home"),
 
 
 ]
