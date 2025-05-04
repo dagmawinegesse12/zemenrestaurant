@@ -1,0 +1,19 @@
+# Python/Django
+zemen_backend/.env
+*.pyc
+__pycache__/
+*.sqlite3
+media/
+staticfiles/
+venv/
+
+# Node/React
+zemen-res/node_modules/
+zemen-res/.env
+zemen-res/build/
+# VSCode or IDE files
+.vscode/
+.idea/
+
+# MacOS
+.DS_Store
