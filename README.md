@@ -30,3 +30,4 @@ This project is designed to give customers a seamless browsing and ordering expe
 
 ```bash
 npm install
+npm start
