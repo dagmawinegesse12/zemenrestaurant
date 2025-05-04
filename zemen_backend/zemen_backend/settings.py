@@ -61,6 +61,7 @@ MIDDLEWARE = [
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'zemen_backend.urls'
+CORS_ALLOW_CREDENTIALS = True
 
 TEMPLATES = [
     {
