@@ -22,7 +22,7 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/orders/', include('orders.urls')),  # This line is ESSENTIAL
-    path('', lambda request: HttpResponse("✅ Zemen Backend is running!"), name='home'),  
+    # path('', lambda request: HttpResponse("✅ Zemen Backend is running!"), name='home'),  
 
 
     #SPA catch-all route --> this should be the last route in the urlpatterns list
