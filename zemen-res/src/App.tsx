@@ -18,7 +18,7 @@ import AdminView from "./components/AdminControls/AdminView";
 import {AdminOrderViewer} from "./components/AdminControls/AdminOrderViewer";
 import AdminReservationView from "./components/AdminControls/AdminReservationView";
 import AdminDashboard from "./components/AdminControls/AdminDashboard";
-
+import Navbar from "./components/Navbar";
 const stripePromise = loadStripe("pk_test_RCPiaZZTfz00jOjiLvgD");
 
 function App() {
@@ -42,7 +42,9 @@ function App() {
                     className="h-screen bg-cover bg-center flex items-center justify-center text-white text-center"
                     style={{ backgroundImage: "url('/bg.png')" }}
                   >
-                    <a
+
+                    <Navbar  />
+                    {/* <a
                       href="#top"
                       className="fixed top-4 left-4 z-50 flex items-center space-x-3 bg-white bg-opacity-90 rounded-full p-2 shadow-lg cursor-pointer"
                     >
@@ -50,7 +52,7 @@ function App() {
                       <span className="text-lg font-bold text-gray-900 hidden md:inline">
                         Zemen Bar & Restaurant
                       </span>
-                    </a>
+                    </a> */}
 
                     <div className="bg-black bg-opacity-60 p-10 rounded">
                       <h1 className="text-4xl md:text-5xl font-bold mb-4">Welcome to Zemen Bar and Restaurant</h1>
@@ -64,7 +66,7 @@ function App() {
                   </section>
                 </motion.div>
 
-                <div className="fixed top-4 right-4 z-50 flex flex-col md:flex-row items-center gap-2 md:gap-4">
+                {/* <div className="fixed top-4 right-4 z-50 flex flex-col md:flex-row items-center gap-2 md:gap-4">
                   <a href="#menu" className="flex items-center space-x-2 bg-white bg-opacity-90 rounded-full px-4 py-2 shadow-lg cursor-pointer">
                     <span className="text-lg font-semibold text-gray-900">📖 Menu</span>
                   </a>
@@ -79,7 +81,7 @@ function App() {
                       )}
                     </div>
                   </a>
-                </div>
+                </div> */}
 
                 <AboutSection />
                 <section id="menu" className="px-8 md:px-24 py-16 bg-[#fefaf3] text-center">

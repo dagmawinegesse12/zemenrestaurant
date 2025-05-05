@@ -20,7 +20,7 @@ export const AboutSection: React.FC = () => {
         transition={{ duration: 0.5 }}
       />
 
-      <div className="md:w-1/2 space-y-8 text-center md:text-left">
+      <div id="#about" className="md:w-1/2 space-y-8 text-center md:text-left">
         <motion.h2
           className="text-4xl font-extrabold"
           initial={{ opacity: 0, y: 20 }}
