@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-
+from corsheaders.defaults import default_headers
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(dotenv_path=BASE_DIR / ".env")
@@ -159,9 +159,14 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
 ]
 
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.vercel\.app$",
+    r"^https://zemenrestaurant\.vercel\.app$",
+]
+
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_HEADERS = [
+CORS_ALLOW_HEADERS =list(default_headers) [
     "accept",
     "accept-encoding",
     "authorization",
@@ -186,3 +191,4 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
+CORS_PREFLIGHT_MAX_AGE = 86400  # Optional but recommended
