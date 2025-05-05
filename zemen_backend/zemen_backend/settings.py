@@ -166,7 +166,7 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_HEADERS =list(default_headers) [
+CORS_ALLOW_HEADERS =list(default_headers) + [
     "accept",
     "accept-encoding",
     "authorization",
