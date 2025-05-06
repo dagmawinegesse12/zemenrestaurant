@@ -123,8 +123,8 @@ const AdminDashboard: React.FC = () => {
     }
 
     return (
-        <div className="bg-gradient-to-tr from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-500 min-h-screen p-8 space-y-12">
-            {/* Navbar */}
+<div className="bg-gradient-to-tr from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-500 min-h-screen px-4 sm:px-6 md:px-12 py-8 space-y-12 overflow-x-hidden">
+{/* Navbar */}
             <div className="flex justify-between items-center mb-12">
                 <div className="flex items-center gap-4">
                     <img src="/favicon.png" alt="Zemen Logo" className="w-12 h-12 rounded-full shadow-md" />
@@ -156,8 +156,8 @@ const AdminDashboard: React.FC = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <StatCard title="Total Orders" value={totalOrders} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <StatCard title="Total Orders" value={totalOrders} />
                 <StatCard title="Total Customers" value={totalCustomers} />
                 <StatCard title="Total Revenue" value={`$${totalRevenue.toFixed(2)}`} />
             </div>
@@ -178,7 +178,7 @@ const AdminDashboard: React.FC = () => {
                 </Section>
 
                 <Section title="Trending Menu Items">
-                    <div className="space-y-4">
+                    <div className="space-y-4 overflow-y-auto">
                         {trendingMenu.map((item, index) => (
                             <div key={index} className="flex justify-between items-center bg-white/80 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
                                 <h4 className="font-semibold dark:text-white">{item.name}</h4>
