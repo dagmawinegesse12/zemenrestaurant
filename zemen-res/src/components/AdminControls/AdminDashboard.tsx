@@ -14,7 +14,7 @@ import AdminView from "./AdminView";
 import { useAdminAuth } from "./AdminAuthContext";
 import { useAdminTheme } from "./AdminThemeProvider";
 import { API_BASE_URL } from "../../utils/api";
-
+import AdminNavbar from "./AdminNavBar";
 interface AdminUser {
     username: string;
 }
@@ -125,35 +125,7 @@ const AdminDashboard: React.FC = () => {
     return (
 <div className="bg-gradient-to-tr from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-500 min-h-screen px-4 sm:px-6 md:px-12 py-8 space-y-12 overflow-x-hidden">
 {/* Navbar */}
-            <div className="flex justify-between items-center mb-12">
-                <div className="flex items-center gap-4">
-                    <img src="/favicon.png" alt="Zemen Logo" className="w-12 h-12 rounded-full shadow-md" />
-                    <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">Zemen Admin Dashboard</h1>
-                </div>
-
-                {adminUser && (
-                    <div className="flex items-center gap-4 bg-white/60 dark:bg-gray-700 backdrop-blur rounded-full px-5 py-2 shadow-md">
-                        <img
-                            src={`https://ui-avatars.com/api/?name=${adminUser.username}&background=random`}
-                            alt="Profile"
-                            className="w-10 h-10 rounded-full border"
-                        />
-                        <button
-                            onClick={toggleTheme}
-                            className="text-xl text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white"
-                        >
-                            {theme === "light" ? "🌙" : "🌞"}
-                        </button>
-                        <span className="font-medium text-gray-800 dark:text-white">{adminUser.username}</span>
-                        <button
-                            onClick={logout}
-                            className="bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-1 rounded-full"
-                        >
-                            Logout
-                        </button>
-                    </div>
-                )}
-            </div>
+            <AdminNavbar adminUser={adminUser} />
 
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
