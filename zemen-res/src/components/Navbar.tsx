@@ -6,18 +6,19 @@ const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("");
   const [isScrolled, setIsScrolled] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
+  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
 
   // Scroll tracking
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 30);
-  
+
       const sections = ["menu", "order-online", "about", "reserve"];
       const scrollY = window.scrollY + 100;
-  
+
       let closestSection = "";
       let minDistance = Infinity;
-  
+
       for (let id of sections) {
         const el = document.getElementById(id);
         if (el) {
@@ -28,17 +29,15 @@ const Navbar: React.FC = () => {
           }
         }
       }
-  
+
       if (closestSection !== activeSection) {
         setActiveSection(closestSection);
       }
     };
-  
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [activeSection]);
-  
-  
 
   // Dark mode detection
   useEffect(() => {
@@ -49,11 +48,26 @@ const Navbar: React.FC = () => {
     }
   }, []);
 
+  // Scroll to section after mobile menu closes
+  useEffect(() => {
+    if (!isOpen && pendingScroll) {
+      const el = document.getElementById(pendingScroll);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      setPendingScroll(null);
+    }
+  }, [isOpen, pendingScroll]);
+
   const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    if (isOpen) {
+      setPendingScroll(id);
       setIsOpen(false);
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
   };
 
@@ -89,7 +103,6 @@ const Navbar: React.FC = () => {
           <button onClick={() => scrollToSection("order-online")} className={linkClass("order-online")}>Order Online</button>
           <button onClick={() => scrollToSection("about")} className={linkClass("about")}>About</button>
           <button onClick={() => scrollToSection("reserve")} className={linkClass("reserve")}>Reserve</button>
-
           <button className="ml-4 text-sm bg-white/20 px-3 py-1 rounded hover:bg-yellow-500 hover:text-black transition">
             EN | አማ
           </button>
@@ -111,21 +124,45 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Links */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="md:hidden overflow-hidden mt-3 space-y-4"
-          >
-            <button onClick={() => scrollToSection("menu")} className="block hover:text-yellow-500">Menu</button>
-            <button onClick={() => scrollToSection("order-online")} className="block hover:text-yellow-500">Order Online</button>
-            <button onClick={() => scrollToSection("about")} className="block hover:text-yellow-500">About</button>
-            <button onClick={() => scrollToSection("reserve")} className="block hover:text-yellow-500">Reserve</button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <AnimatePresence
+  onExitComplete={() => {
+    if (pendingScroll) {
+      const el = document.getElementById(pendingScroll);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      setPendingScroll(null);
+    }
+  }}
+>
+  {isOpen && (
+    <motion.div
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ height: "auto", opacity: 1 }}
+      exit={{ height: 0, opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="md:hidden overflow-hidden mt-3 space-y-4"
+    >
+      {/* Logo + Restaurant Name */}
+      <a href="/" className="flex items-center space-x-3 px-4">
+        <img
+          src="/favicon.png"
+          alt="Zemen Logo"
+          className="h-10 w-10 rounded-full bg-white/10 p-1"
+        />
+        <span className="font-bold text-lg">Zemen Bar & Restaurant</span>
+      </a>
+
+      {/* Menu Links */}
+      <button onClick={() => scrollToSection("menu")} className="block px-4 py-2 hover:text-yellow-500">Menu</button>
+      <button onClick={() => scrollToSection("order-online")} className="block px-4 py-2 hover:text-yellow-500">Order Online</button>
+      <button onClick={() => scrollToSection("about")} className="block px-4 py-2 hover:text-yellow-500">About</button>
+      <button onClick={() => scrollToSection("reserve")} className="block px-4 py-2 hover:text-yellow-500">Reserve</button>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+
     </nav>
   );
 };

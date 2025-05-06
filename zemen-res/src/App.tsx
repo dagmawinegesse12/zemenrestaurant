@@ -84,10 +84,12 @@ function App() {
                 </div> */}
 
                 <AboutSection />
-                <section id="menu" className="px-8 md:px-24 py-16 bg-[#fefaf3] text-center">
+                <section id="menu" className="bg-[#5c2f13]">
                   <StaticMenuPreview />
                 </section>
-                <section id="order-online" className="px-8 md:px-24 py-16 bg-white text-center">
+                {/* <section className="px-6 md:px-24 py-16 bg-[#5c2f13] text-white font-serif"> */}
+
+                <section id="order-online" className="px-6 md:px-24 py-16 bg-[#5c2f13] text-white font-serif">
                   <Toaster />
                   <InteractiveMenuOrder quantities={quantities} setQuantities={setQuantities} />
                 </section>
